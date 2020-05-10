@@ -1,0 +1,15 @@
+{
+  "name": "learning-redux-05-10",
+  "version": "1.0.0",
+  "description": "A simple project / reference for Redux.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Simonas Karalius",
+  "license": "MIT",
+  "dependencies": {
+    "redux": "^4.0.5"
+  }
+}
