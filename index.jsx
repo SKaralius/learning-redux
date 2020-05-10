@@ -1,3 +1,7 @@
+const React = require('react');
+const ReactDOM = require('react-dom');
+const {createStore} = require('redux');
+
 // This is a reducer function, which takes an argument of
 // state and an action.
 // Action has types which return functions.
@@ -14,12 +18,34 @@ const counter = (state = 0, action) => {
   }
 };
 
+const Counter = ({ value, onIncrement, onDecrement }) => {
+ return <div>
+          <h1>{value}</h1>
+          <button onClick={onIncrement}>+</button>
+          <button onClick={onDecrement}>+</button>
+        </div>;
+};
+
 // Create a state tree
-const store = Redux.createStore(counter);
+const store = createStore(counter);
 
 // Define a render function which updates the document with the state.
 const render = () => {
-  document.body.innerText = store.getState();
+  ReactDOM.render(
+    <Counter value={store.getState()} 
+    onIncrement={()=>{
+      store.dispatch({
+        type: "INCREMENT"
+      })
+    }}
+    onDecrement={()=>{
+      store.dispatch({
+        type: "DECREMENT"
+      })
+    }}    
+    />,
+    document.getElementById("root")
+  );
 };
 // Initial call so that a blank page would not be rendered
 // before the click.
@@ -29,9 +55,4 @@ render();
 // on every state change.
 store.subscribe(() => {
   render();
-});
-
-// store.dispatch calls an action.
-document.addEventListener("click", () => {
-  store.dispatch({ type: "INCREMENT" });
 });
