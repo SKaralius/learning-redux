@@ -1,15 +1,12 @@
 import { connect } from "react-redux";
-import { addTodo } from "../actions";
+import { addTodo } from "../features/todos/todosSlice";
 import AddTodo from "../components/AddTodo";
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return { value: state.todos };
 };
 
-export default connect(
-  mapStateToProps,
-  { addTodo }
-)(AddTodo);
+export default connect(mapStateToProps, { addTodo })(AddTodo);
 
 //If you call connect without providing any arguments, your component will:
 

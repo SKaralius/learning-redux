@@ -1,19 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 
 const AddTodo = ({ addTodo }) => {
-  let input;
-  const handleSubmit = e => {
+  const [todoText, setTodoText] = useState("");
+  const onChange = (e) => setTodoText(e.target.value);
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (!input.value.trim()) {
+    if (!todoText.trim()) {
       return;
     }
-    addTodo(input.value);
-    input.value = "";
+    addTodo(todoText);
+    setTodoText("");
   };
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <input ref={node => (input = node)} />
+        <input value={todoText} onChange={onChange} />
         <button type="submit">Add Todo</button>
       </form>
     </div>

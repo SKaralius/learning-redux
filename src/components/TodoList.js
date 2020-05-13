@@ -3,18 +3,17 @@ import PropTypes from "prop-types";
 import Todo from "./Todo";
 import { connect } from "react-redux";
 
-const TodoList = props => {
-  console.log(props);
+const TodoList = (props) => {
   return (
     <ul>
       {props.todos.length < 1 ? (
         <li>{`No todo's in ${props.filter}`}</li>
       ) : (
-        props.todos.map(todo => (
+        props.todos.map((todo) => (
           <Todo
             key={todo.id}
             {...todo}
-            onClick={() => props.toggleTodo(todo.id)}
+            onClick={() => props.toggleTodo({ id: todo.id })}
           />
         ))
       )}
@@ -22,7 +21,7 @@ const TodoList = props => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return { filter: state.visibilityFilter };
 };
 
@@ -31,10 +30,10 @@ TodoList.propTypes = {
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       completed: PropTypes.bool.isRequired,
-      text: PropTypes.string.isRequired
+      text: PropTypes.string.isRequired,
     }).isRequired
   ).isRequired,
-  toggleTodo: PropTypes.func.isRequired
+  toggleTodo: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps)(TodoList);
